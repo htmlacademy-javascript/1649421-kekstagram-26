@@ -1,41 +1,32 @@
-import {
-  getRandomNumber
-} from './util.js';
+import { getRandomNumber } from "./util.js";
 
 const NUMBER_OBJECTS = 25;
 const NUMBER_AVATARS = 6;
 const MESSAGES = [
-  'Всё отлично!',
-  'В целом всё неплохо.Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра.В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают.Как можно было поймать такой неудачный момент ? !'
+  "Всё отлично!",
+  "В целом всё неплохо.Но не всё.",
+  "Когда вы делаете фотографию, хорошо бы убирать палец из кадра.В конце концов это просто непрофессионально.",
+  "Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.",
+  "Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.",
+  "Лица у людей на фотке перекошены, как будто их избивают.Как можно было поймать такой неудачный момент ? !",
 ];
 const NAMES = [
-  'Илья',
-  'Сергей',
-  'Алексей',
-  'Александр',
-  'Николай',
-  'Семен',
-  'Павел',
-  'Лука',
-  'Тимофей',
-  'Григорий',
-  'Фекла',
-  'Лена',
-  'Света',
+  "Илья",
+  "Сергей",
+  "Алексей",
+  "Александр",
+  "Николай",
+  "Семен",
+  "Павел",
+  "Лука",
+  "Тимофей",
+  "Григорий",
+  "Фекла",
+  "Лена",
+  "Света",
 ];
 
-const DESCRIPTIONS = [
-  'Котик',
-  'Домик',
-  'Вид',
-  'Природа',
-  'Море',
-  'Лес'
-];
+const DESCRIPTIONS = ["Котик", "Домик", "Вид", "Природа", "Море", "Лес"];
 
 const LIKES = 200;
 
@@ -52,8 +43,6 @@ const getMessage = (number) => MESSAGES[number];
 const getName = (number) => NAMES[number];
 
 const getDescription = (number) => DESCRIPTIONS[number];
-
-const getLike = (number) => LIKES[number];
 
 const getUrl = (number) => `photos/${number}.jpg`;
 
@@ -78,11 +67,10 @@ const createObject = () => ({
   message: getMessage(getRandomNumber(1, MESSAGES.length - 1)),
   name: getName(getRandomNumber(1, NAMES.length - 1)),
   description: getDescription(getRandomNumber(1, DESCRIPTIONS.length - 1)),
-  likes: getLike(getRandomNumber(15, LIKES.length - 1)),
+  likes: getRandomNumber(15, LIKES),
   url: getUrl(getRandomNumber(1, MAX_NUMBER_PHOTOS)),
-  comments: getComments(getRandomNumber(1, MAX_NUMBER_COMMENTS))
+  comments: getComments(getRandomNumber(1, MAX_NUMBER_COMMENTS)),
 });
-
 
 const createObjectsList = (number) => {
   const photos = [];
@@ -92,6 +80,4 @@ const createObjectsList = (number) => {
   return photos;
 };
 
-export {
-  createObjectsList
-};
+export { createObjectsList };
