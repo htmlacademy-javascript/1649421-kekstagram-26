@@ -1,10 +1,13 @@
+import { commentsModel } from "./comments-model.js";
+
 const bigPictureModal = document.querySelector(".big-picture");
 const bigPictureImage = document.querySelector(".big-picture__img img");
 const likesBlock = document.querySelector(".likes-count");
-const totalComments = document.querySelector(".comments-count");
+const totalComments = document.querySelector(".social__comment-count");
 const commentsList = document.querySelector(".social__comments");
 const commentItem = document.querySelector(".social__comment");
 const bigPictureModalClose = document.querySelector(".big-picture__cancel");
+const loadButton = document.querySelector(".comments-loader");
 
 const showModal = () => {
   bigPictureModal.classList.remove("hidden");
@@ -24,8 +27,8 @@ const renderLikes = (likes) => {
   likesBlock.textContent = likes;
 };
 
-const renderStatisticComments = (total) => {
-  totalComments.textContent = total;
+const renderStatisticComments = (showed, total) => {
+  totalComments.textContent = `${showed} из ${total} комментариев`;
 };
 
 const renderComments = (comments) => {
@@ -48,18 +51,67 @@ const renderDescription = (description) => {};
 
 const closeModal = () => {};
 
+const showLoadButton = () => {
+  loadButton.classList.remove("hidden");
+};
+
+const hideLoadButton = () => {
+  loadButton.classList.add("hidden");
+};
+
+const renderLoadButton = (showed, total) => {
+  if (showed < total) {
+    showLoadButton();
+  } else {
+    hideLoadButton();
+  }
+};
+
+const loadButtonHandler = () => {
+  commentsModel.setNextDose();
+  renderStatisticComments(
+    commentsModel.getCurrentNumber(),
+    commentsModel.getTotalNumber()
+  );
+  renderComments(commentsModel.getDoseShowedComments());
+  renderLoadButton(
+    commentsModel.getCurrentNumber(),
+    commentsModel.getTotalNumber()
+  );
+};
+
+const escapeKeydownHandler = (evt) => {
+  if (evt.key === "Escape") {
+    evt.preventDefault();
+    hideModal();
+  }
+};
+
 const bigPicture = (photo) => {
+  commentsModel.setStartModel(photo.comments);
+  console.log(commentsModel.getModel());
   showModal();
   renderBigImage(photo.url);
   renderLikes(photo.likes);
-  renderStatisticComments(photo.comments.length);
+  renderStatisticComments(
+    commentsModel.getCurrentNumber(),
+    commentsModel.getTotalNumber()
+  );
   clearComments();
-  renderComments(photo.comments);
+  renderComments(commentsModel.getDoseShowedComments());
   renderDescription(photo.description);
+  renderLoadButton(
+    commentsModel.getCurrentNumber(),
+    commentsModel.getTotalNumber()
+  );
+  loadButton.addEventListener("click", loadButtonHandler);
+  document.addEventListener("keydown", escapeKeydownHandler);
 };
 
 const onCloseModalHandler = () => {
   hideModal();
+  loadButton.removeEventListener("click", loadButtonHandler);
+  document.removeEventListener("keydown", escapeKeydownHandler);
 };
 
 bigPictureModalClose.addEventListener("click", onCloseModalHandler);
