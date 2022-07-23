@@ -1,5 +1,7 @@
 const sliderElement = document.querySelector(".effect-level__slider");
 
+const valueElement = document.querySelector(".effect-level__value");
+
 const sliderInit = () => {
   noUiSlider.create(sliderElement, {
     range: {
@@ -14,7 +16,12 @@ const sliderInit = () => {
 
 const effects = () => {
   sliderInit();
+  sliderElement.noUiSlider.on("update", () => {
+    valueElement.value = sliderElement.noUiSlider.get();
+    console.log(valueElement.value);
+  });
 };
+
 const resetEffects = () => {};
 
 export { effects, resetEffects };

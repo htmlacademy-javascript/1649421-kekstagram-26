@@ -22,6 +22,7 @@ const openForm = () => {
   uploadPreviewImage.src = URL.createObjectURL(file);
   scale();
   document.addEventListener("keydown", escapeKeydownHandler);
+  effects();
 };
 
 const submitHandler = (evt) => {
