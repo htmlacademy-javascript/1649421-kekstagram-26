@@ -1,3 +1,6 @@
+import { scale, scaleDestroy } from "./scale.js";
+import { effects, resetEffects } from "./effects.js";
+
 const uploadFileInput = document.querySelector("#upload-file");
 const overlay = document.querySelector(".img-upload__overlay");
 const uploadPreviewImage = document.querySelector(".img-upload__preview img");
@@ -9,6 +12,7 @@ const textDescription = document.querySelector(".text__description");
 const hideForm = () => {
   overlay.classList.add("hidden");
   document.body.classList.remove("modal-open");
+  scaleDestroy();
 };
 
 const openForm = () => {
@@ -16,6 +20,7 @@ const openForm = () => {
   document.body.classList.add("modal-open");
   const file = uploadFileInput.files[0];
   uploadPreviewImage.src = URL.createObjectURL(file);
+  scale();
   document.addEventListener("keydown", escapeKeydownHandler);
 };
 
