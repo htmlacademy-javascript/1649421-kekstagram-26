@@ -1,28 +1,37 @@
-const createLoader = (onSuccess, onError) => {
-  fetch('https://26.javascript.pages.academy/kekstagram/data', {
-    method: 'POST',
-  }).then((response) => response.json());
-};
-
-/*const createLoader = (onSuccess, onError) => (
-
-  return fetch('https://26.javascript.pages.academy/code-and-magick/data', {
-    method: 'GET',
-    credentials: 'same-origin',
-  })
+const getData = (onSuccess, onFail) => {
+  fetch('https://26.javascript.pages.academy/kekstagram/data')
     .then((response) => {
       if (response.ok) {
-        return response.json();
+        response.json()
+          .then((data) => {
+            onSuccess(data);
+          });
+      } else {
+        onFail();
       }
-
-      throw new Error(`${response.status} ${response.statusText}`);
     })
-    .then((data) => {
-      onSuccess(data);
-    })
-    .catch((err) => {
-      onError(err);
+    .catch(() => {
+      onFail();
     });
-);*/
+};
 
-export { createLoader };
+const sendData = (onSuccess, onFail, body) => {
+  fetch('https://26.javascript.pages.academy/kekstagram',
+    {
+      method: 'POST',
+      body,
+    })
+    .then((response) => {
+      if (response.ok) {
+        onSuccess();
+      } else {
+        onFail();
+      }
+    })
+    .catch(() => {
+      onFail();
+    });
+};
+
+
+export { getData, sendData };

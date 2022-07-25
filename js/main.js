@@ -1,14 +1,15 @@
-import { createObjectsList } from './data.js';
-
 import { renderThumbnails } from './thumbnails.js';
-
 import { upLoadForm } from './form.js';
+import { getData } from './fetch.js';
 
-import { createLoader } from './fetch.js';
+getData(
+  (data) => {
+    renderThumbnails(data);
+    upLoadForm();
+  },
+  () => {
+    showAlert('Упс! Данные не подгрузились :( Попробуйте позже!');
+  }
+)
 
-const NUMBER_OBJECTS = 25;
-const objectList = createObjectsList(NUMBER_OBJECTS);
-renderThumbnails(objectList);
-upLoadForm();
-createLoader();
-console.log(createLoader());
+
