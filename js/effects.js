@@ -1,8 +1,8 @@
-const sliderElement = document.querySelector(".effect-level__slider");
-const valueElement = document.querySelector(".effect-level__value");
-const effectsList = document.querySelector(".effects__list");
-const sliderBlock = document.querySelector(".effect-level");
-const uploadPreviewImage = document.querySelector(".img-upload__preview img");
+const sliderElement = document.querySelector('.effect-level__slider');
+const valueElement = document.querySelector('.effect-level__value');
+const effectsList = document.querySelector('.effects__list');
+const sliderBlock = document.querySelector('.effect-level');
+const uploadPreviewImage = document.querySelector('.img-upload__preview img');
 
 const sliderInit = () => {
   noUiSlider.create(sliderElement, {
@@ -12,26 +12,26 @@ const sliderInit = () => {
     },
     start: 80,
     step: 1,
-    connect: "lower",
+    connect: 'lower',
   });
 };
 
 const addEffect = (effect) => {
-  let filterStyle = "";
+  let filterStyle = '';
   switch (effect) {
-    case "chrome":
+    case 'chrome':
       filterStyle = `grayscale(${valueElement.value})`;
       break;
-    case "sepia":
+    case 'sepia':
       filterStyle = `sepia(${valueElement.value})`;
       break;
-    case "marvin":
+    case 'marvin':
       filterStyle = `invert(${valueElement.value}%)`;
       break;
-    case "phobos":
+    case 'phobos':
       filterStyle = `blur(${valueElement.value}px)`;
       break;
-    case "heat":
+    case 'heat':
       filterStyle = `brightness(${valueElement.value})`;
       break;
   }
@@ -39,15 +39,15 @@ const addEffect = (effect) => {
 };
 
 const plugSliderListener = () => {
-  sliderElement.noUiSlider.on("update", () => {
+  sliderElement.noUiSlider.on('update', () => {
     valueElement.value = sliderElement.noUiSlider.get();
-    addEffect(document.querySelector(".effects__radio:checked").value);
+    addEffect(document.querySelector('.effects__radio:checked').value);
   });
 };
 
 const updateSliderOption = (effect) => {
   switch (effect) {
-    case "chrome":
+    case 'chrome':
       sliderElement.noUiSlider.updateOptions({
         range: {
           min: 0,
@@ -57,7 +57,7 @@ const updateSliderOption = (effect) => {
         step: 0.1,
       });
       break;
-    case "sepia":
+    case 'sepia':
       sliderElement.noUiSlider.updateOptions({
         range: {
           min: 0,
@@ -67,7 +67,7 @@ const updateSliderOption = (effect) => {
         start: 1,
       });
       break;
-    case "marvin":
+    case 'marvin':
       sliderElement.noUiSlider.updateOptions({
         range: {
           min: 0,
@@ -77,7 +77,7 @@ const updateSliderOption = (effect) => {
         start: 100,
       });
       break;
-    case "phobos":
+    case 'phobos':
       sliderElement.noUiSlider.updateOptions({
         range: {
           min: 0,
@@ -87,7 +87,7 @@ const updateSliderOption = (effect) => {
         start: 3,
       });
       break;
-    case "heat":
+    case 'heat':
       sliderElement.noUiSlider.updateOptions({
         range: {
           min: 1,
@@ -101,14 +101,14 @@ const updateSliderOption = (effect) => {
 };
 
 const plugRadioListener = () => {
-  effectsList.addEventListener("change", (evt) => {
-    if (evt.target.name === "effect") {
+  effectsList.addEventListener('change', (evt) => {
+    if (evt.target.name === 'effect') {
       updateSliderOption(evt.target.value);
-      if (evt.target.value === "none") {
-        sliderBlock.classList.add("hidden");
-        uploadPreviewImage.style.filter = "";
+      if (evt.target.value === 'none') {
+        sliderBlock.classList.add('hidden');
+        uploadPreviewImage.style.filter = '';
       } else {
-        sliderBlock.classList.remove("hidden");
+        sliderBlock.classList.remove('hidden');
         addEffect(evt.target.value);
       }
     }
