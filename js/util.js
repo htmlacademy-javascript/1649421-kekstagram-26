@@ -1,3 +1,5 @@
+const TIME_OUT_DELAY = 500;
+
 const getRandomNumber = (min, max) => {
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
@@ -5,6 +7,13 @@ const getRandomNumber = (min, max) => {
   return Math.floor(result);
 };
 
-export {
-  getRandomNumber
+const debounce = (callback, timeoutDelay = TIME_OUT_DELAY) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
 };
+
+export { getRandomNumber, debounce };
