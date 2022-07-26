@@ -1,7 +1,7 @@
-const scaleControlSmaller = document.querySelector(".scale__control--smaller");
-const scaleControlBigger = document.querySelector(".scale__control--bigger");
-const scaleControlValue = document.querySelector(".scale__control--value");
-const uploadPreviewImage = document.querySelector(".img-upload__preview img");
+const scaleControlSmaller = document.querySelector('.scale__control--smaller');
+const scaleControlBigger = document.querySelector('.scale__control--bigger');
+const scaleControlValue = document.querySelector('.scale__control--value');
+const uploadPreviewImage = document.querySelector('.img-upload__preview img');
 
 const scaleModel = {
   scale: 100,
@@ -39,16 +39,16 @@ const increaseScale = () => {
 };
 
 const scale = () => {
-  scaleControlSmaller.addEventListener("click", decreaseScale);
-  scaleControlBigger.addEventListener("click", increaseScale);
+  scaleControlSmaller.addEventListener('click', decreaseScale);
+  scaleControlBigger.addEventListener('click', increaseScale);
   resetScaleModel();
   renderScaleValue();
   renderScaleImage();
 };
 
 const scaleDestroy = () => {
-  scaleControlSmaller.removeEventListener("click", decreaseScale);
-  scaleControlBigger.removeEventListener("click", increaseScale);
+  scaleControlSmaller.removeEventListener('click', decreaseScale);
+  scaleControlBigger.removeEventListener('click', increaseScale);
 };
 
 export { scale, scaleDestroy };
