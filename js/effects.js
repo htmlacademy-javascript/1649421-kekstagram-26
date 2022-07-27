@@ -121,10 +121,6 @@ const resetEffects = () => {
   document.querySelector('#effect-none').setAttribute('checked', 'checked');
 };
 
-const sliderDestroy = () => {
-
-}
-
 const effects = () => {
   resetEffects();
   plugSliderListener();

@@ -9,7 +9,6 @@ const overlay = document.querySelector('.img-upload__overlay');
 const uploadPreviewImage = document.querySelector('.img-upload__preview img');
 const overlayCloseButton = document.querySelector('.img-upload__cancel');
 const uploadFormImage = document.querySelector('.img-upload__form');
-const uploadFormElement = document.querySelector('#upload-select-image');
 
 const hideForm = () => {
   overlay.classList.add('hidden');
@@ -29,7 +28,7 @@ const openForm = () => {
   effects();
 };
 
-const submitHandler = (evt) => {
+function submitHandler(evt) {
   evt.preventDefault();
   if (isValid()) {
     sendData(
@@ -44,7 +43,7 @@ const submitHandler = (evt) => {
       new FormData(uploadFormImage)
     );
   }
-};
+}
 
 const upLoadForm = () => {
   sliderInit();
