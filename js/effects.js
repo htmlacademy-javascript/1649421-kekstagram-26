@@ -115,12 +115,16 @@ const plugRadioListener = () => {
   });
 };
 
+const resetEffects = () => {
+  sliderBlock.classList.add('hidden');
+  uploadPreviewImage.style.filter = '';
+  document.querySelector('#effect-none').setAttribute('checked', 'checked');
+};
+
 const effects = () => {
-  sliderInit();
+  resetEffects();
   plugSliderListener();
   plugRadioListener();
 };
 
-const resetEffects = () => {};
-
-export { effects, resetEffects };
+export { effects, sliderInit };
