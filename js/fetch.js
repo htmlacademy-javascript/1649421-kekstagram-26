@@ -28,7 +28,7 @@ const sendData = (onSuccess, onFail, body) => {
         onFail();
       }
     })
-    .catch(() => {
+    .catch((error) => {
       onFail();
     });
 };

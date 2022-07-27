@@ -1,22 +1,26 @@
 import { scale, scaleDestroy } from './scale.js';
-import { effects, resetEffects } from './effects.js';
+import { effects, sliderInit } from './effects.js';
+import { isValid } from './upload-validator.js';
+import { sendData } from './fetch.js';
+import { SuccessMessage, ErrorMessage } from './modals.js';
 
 const uploadFileInput = document.querySelector('#upload-file');
 const overlay = document.querySelector('.img-upload__overlay');
 const uploadPreviewImage = document.querySelector('.img-upload__preview img');
 const overlayCloseButton = document.querySelector('.img-upload__cancel');
 const uploadFormImage = document.querySelector('.img-upload__form');
-const textHashtags = document.querySelector('.text__hashtags');
-const textDescription = document.querySelector('.text__description');
+const uploadFormElement = document.querySelector('#upload-select-image');
 
 const hideForm = () => {
   overlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   scaleDestroy();
+  uploadFormImage.removeEventListener('submit', submitHandler);
 };
 
 const openForm = () => {
   overlay.classList.remove('hidden');
+  uploadFormImage.addEventListener('submit', submitHandler);
   document.body.classList.add('modal-open');
   const file = uploadFileInput.files[0];
   uploadPreviewImage.src = URL.createObjectURL(file);
@@ -27,16 +31,25 @@ const openForm = () => {
 
 const submitHandler = (evt) => {
   evt.preventDefault();
-  const re = /^#[A-Za-zA-Яа-яЁё0-9]{1,19}/;
-  if (re.test(textHashtags.value)) {
-    console.log('все верно');
+  if (isValid()) {
+    sendData(
+      () => {
+        hideForm();
+        SuccessMessage();
+      },
+      () => {
+        hideForm();
+        ErrorMessage();
+      },
+      new FormData(uploadFormImage)
+    );
   }
 };
 
 const upLoadForm = () => {
+  sliderInit();
   uploadFileInput.addEventListener('change', openForm);
   overlayCloseButton.addEventListener('click', hideForm);
-  uploadFormImage.addEventListener('submit', submitHandler);
 };
 
 function escapeKeydownHandler(evt) {

@@ -8,6 +8,7 @@ const commentsList = document.querySelector('.social__comments');
 const commentItem = document.querySelector('.social__comment');
 const bigPictureModalClose = document.querySelector('.big-picture__cancel');
 const loadButton = document.querySelector('.comments-loader');
+const captionBlock = document.querySelector('.social__caption');
 
 const showModal = () => {
   bigPictureModal.classList.remove('hidden');
@@ -47,9 +48,9 @@ const clearComments = () => {
   commentsList.innerHTML = '';
 };
 
-const renderDescription = (description) => {};
-
-const closeModal = () => {};
+const renderDescription = (description) => {
+  captionBlock.textContent = description;
+};
 
 const showLoadButton = () => {
   loadButton.classList.remove('hidden');
@@ -89,7 +90,6 @@ const escapeKeydownHandler = (evt) => {
 
 const bigPicture = (photo) => {
   commentsModel.setStartModel(photo.comments);
-  console.log(commentsModel.getModel());
   showModal();
   renderBigImage(photo.url);
   renderLikes(photo.likes);
