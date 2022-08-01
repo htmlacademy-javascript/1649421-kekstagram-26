@@ -16,7 +16,7 @@ const resetForm = () => {
   uploadFileInput.value = '';
   hashTagsInput.value = '';
   textInput.value = '';
-}
+};
 
 const hideForm = () => {
   overlay.classList.add('hidden');
@@ -27,11 +27,16 @@ const hideForm = () => {
 };
 
 const escapeKeydownHandler = (evt) => {
-  if (evt.key === 'Escape' && document.activeElement !== hashTagsInput && document.activeElement !== textInput && !overlay.classList.contains('hidden')) {
+  if (
+    evt.key === 'Escape' &&
+    document.activeElement !== hashTagsInput &&
+    document.activeElement !== textInput &&
+    !overlay.classList.contains('hidden')
+  ) {
     evt.preventDefault();
     hideForm();
   }
-}
+};
 
 const openForm = () => {
   overlay.classList.remove('hidden');
@@ -68,7 +73,7 @@ const uploadFileInputChangeHandler = () => {
 const overlayCloseButtonClickHandler = () => {
   hideForm();
   document.removeEventListener('keydown', escapeKeydownHandler);
-}
+};
 
 const upLoadForm = () => {
   createSlider();

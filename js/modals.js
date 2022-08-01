@@ -1,7 +1,11 @@
-import {escapeKeydownHandler} from './form.js';
+import { escapeKeydownHandler } from './form.js';
 
-const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
-const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
+const successMessageTemplate = document
+  .querySelector('#success')
+  .content.querySelector('.success');
+const errorMessageTemplate = document
+  .querySelector('#error')
+  .content.querySelector('.error');
 
 const renderSuccessMessage = () => {
   const documentFragment = document.createDocumentFragment();
@@ -9,10 +13,17 @@ const renderSuccessMessage = () => {
   documentFragment.append(successMessageElement);
   document.body.append(documentFragment);
   addSuccessMessageHandlers(successMessageElement);
-  const successMessageEscapeHandler = messageEscapeHandler(successMessageElement);
+  const successMessageEscapeHandler = messageEscapeHandler(
+    successMessageElement
+  );
   document.addEventListener('keydown', successMessageEscapeHandler);
-  const successMessageOutsideClickHandler = messageOutsideClickHandler(successMessageElement);
-  successMessageElement.addEventListener('click', successMessageOutsideClickHandler);
+  const successMessageOutsideClickHandler = messageOutsideClickHandler(
+    successMessageElement
+  );
+  successMessageElement.addEventListener(
+    'click',
+    successMessageOutsideClickHandler
+  );
 };
 
 function addSuccessMessageHandlers(successMessageElement) {
@@ -32,8 +43,14 @@ const renderErrorMessage = () => {
   addErrorMessageHandlers(errorMessageElement);
   const errorMessageEscapeHandler = messageEscapeHandler(errorMessageElement);
   document.addEventListener('keydown', errorMessageEscapeHandler);
-  const errorMessageOutsideClickHandler = messageOutsideClickHandler(errorMessageElement, 'error');
-  errorMessageElement.addEventListener('click', errorMessageOutsideClickHandler);
+  const errorMessageOutsideClickHandler = messageOutsideClickHandler(
+    errorMessageElement,
+    'error'
+  );
+  errorMessageElement.addEventListener(
+    'click',
+    errorMessageOutsideClickHandler
+  );
 };
 
 function addErrorMessageHandlers(errorMessageElement) {
@@ -44,15 +61,15 @@ function addErrorMessageHandlers(errorMessageElement) {
   });
 }
 
-function messageEscapeHandler (messageElement) {
+function messageEscapeHandler(messageElement) {
   return (evt) => {
     if (evt.key === 'Escape') {
       messageElement.remove();
     }
-  }
+  };
 }
 
-function messageOutsideClickHandler (messageElement, error) {
+function messageOutsideClickHandler(messageElement, error) {
   return (evt) => {
     if (evt.target === evt.currentTarget) {
       messageElement.remove();
@@ -60,7 +77,7 @@ function messageOutsideClickHandler (messageElement, error) {
         document.addEventListener('keydown', escapeKeydownHandler);
       }
     }
-  }  
+  };
 }
 
 export { renderSuccessMessage, renderErrorMessage };
