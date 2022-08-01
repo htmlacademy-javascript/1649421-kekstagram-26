@@ -29,9 +29,9 @@ const getRandomPhotos = (data) => {
 };
 
 const getDiscussedPhotos = (data) => {
-  const algorithmComparison = (firstPhoto, secondPhoto) =>
+  const getComparison = (firstPhoto, secondPhoto) =>
     secondPhoto.comments.length - firstPhoto.comments.length;
-  const popularPhotos = data.slice().sort(algorithmComparison);
+  const popularPhotos = data.slice().sort(getComparison);
   return popularPhotos;
 };
 

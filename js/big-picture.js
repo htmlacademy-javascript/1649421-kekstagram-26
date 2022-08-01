@@ -88,7 +88,7 @@ const escapeKeydownHandler = (evt) => {
   }
 };
 
-const bigPicture = (photo) => {
+const renderBigPicture = (photo) => {
   commentsModel.setStartModel(photo.comments);
   showModal();
   renderBigImage(photo.url);
@@ -116,4 +116,4 @@ const onCloseModalHandler = () => {
 
 bigPictureModalClose.addEventListener('click', onCloseModalHandler);
 
-export { bigPicture };
+export { renderBigPicture };
