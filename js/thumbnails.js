@@ -1,4 +1,4 @@
-import { bigPicture } from './big-picture.js';
+import { renderBigPicture } from './big-picture.js';
 
 const thumbnailsContainer = document.querySelector('.pictures');
 const thumbnailTemplate = document
@@ -14,7 +14,7 @@ const renderThumbnails = (thumbnails) => {
       thumbnail.comments.length;
     newThumbnail.querySelector('.picture__likes').textContent = thumbnail.likes;
     thumbnailsFragment.append(newThumbnail);
-    newThumbnail.addEventListener('click', () => bigPicture(thumbnail));
+    newThumbnail.addEventListener('click', () => renderBigPicture(thumbnail));
   });
   thumbnailsContainer.append(thumbnailsFragment);
 };

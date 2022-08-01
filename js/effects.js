@@ -4,7 +4,7 @@ const effectsList = document.querySelector('.effects__list');
 const sliderBlock = document.querySelector('.effect-level');
 const uploadPreviewImage = document.querySelector('.img-upload__preview img');
 
-const sliderInit = () => {
+const createSlider = () => {
   noUiSlider.create(sliderElement, {
     range: {
       min: 0,
@@ -118,7 +118,7 @@ const plugRadioListener = () => {
 const resetEffects = () => {
   sliderBlock.classList.add('hidden');
   uploadPreviewImage.style.filter = '';
-  document.querySelector('#effect-none').setAttribute('checked', 'checked');
+  document.querySelector('#effect-none').checked = true;
 };
 
 const effects = () => {
@@ -127,4 +127,4 @@ const effects = () => {
   plugRadioListener();
 };
 
-export { effects, sliderInit };
+export { effects, createSlider };
